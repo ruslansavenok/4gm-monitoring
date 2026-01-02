@@ -26,7 +26,7 @@ export const client = new RPCSocketClient(
       }
       return JSON.parse(value);
     },
-  }
+  },
 );
 
 export function heartbeat() {

@@ -1,1 +1,2 @@
 prettier -w .
+git add -u

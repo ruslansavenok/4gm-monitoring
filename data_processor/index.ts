@@ -8,6 +8,6 @@ api.client.on("open", async function () {
     items.map((row) => ({
       ...row,
       price: row.price.toLocaleString(),
-    }))
+    })),
   );
 });
