@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "bun ./index.ts",
+    "start": "bun ./data_processor/index.ts",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -12,6 +12,8 @@
     "prettier": "^3.7.4"
   },
   "dependencies": {
-    "dotenv": "^17.2.3"
+    "dotenv": "^17.2.3",
+    "rpc-websockets": "^9.3.2",
+    "uuid": "^13.0.0"
   }
 }

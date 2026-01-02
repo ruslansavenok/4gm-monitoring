@@ -8,7 +8,5 @@ function getEnvVariable(key: string) {
   return value;
 }
 
-const socketHost = getEnvVariable("4GM_SOCKET_HOST");
-const socketToken = getEnvVariable("4GM_SOCKET_TOKEN");
-
-export const SOCKET_URL = `${socketHost}/?token=${socketToken}`;
+export const SOCKET_URL = getEnvVariable("4GM_SOCKET_URL");
+export const SOCKET_USER_ID = parseInt(getEnvVariable("4GM_SOCKET_USER_ID"));
