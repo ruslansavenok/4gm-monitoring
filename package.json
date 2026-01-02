@@ -1,0 +1,17 @@
+{
+  "name": "4gm-monitoring",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "bun ./index.ts",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "husky": "^9.1.7",
+    "prettier": "^3.7.4"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3"
+  }
+}
