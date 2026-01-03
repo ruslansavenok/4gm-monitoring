@@ -53,13 +53,19 @@ interface GameSignalPredicateResponse {
       when: string;
       name: string;
       characterName: string; // this is missing when Worldwide
-      enchant: string;
+      enchant: number;
     };
   }[];
   type: "data";
 }
 
-export async function gameSignalPredicate({ itemId }: { itemId: number }) {
+export async function gameSignalPredicate({
+  serverId,
+  itemId,
+}: {
+  serverId: number;
+  itemId: number;
+}) {
   const response = (await client.call("executeGameSignalPredicate", {
     lang: "ru",
     options: {
@@ -70,7 +76,7 @@ export async function gameSignalPredicate({ itemId }: { itemId: number }) {
     },
     parameters: {
       1: itemId,
-      2: 45,
+      2: serverId,
     },
     signalId: 1196,
     toPartnerId: "l2-ru",
