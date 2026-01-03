@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "module": "nodenext",
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true

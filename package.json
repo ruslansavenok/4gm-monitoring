@@ -2,21 +2,22 @@
   "name": "4gm-monitoring",
   "version": "1.0.0",
   "type": "module",
+  "workspaces": [
+    "data_processor"
+  ],
   "scripts": {
-    "start": "bun ./data_processor/index.ts",
+    "parser:start": "npm run start -w data_processor",
     "test": "vitest run",
     "prepare": "husky"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "mongoose": "^9.1.1"
   },
   "devDependencies": {
     "@types/node": "^25.0.3",
     "husky": "^9.1.7",
     "prettier": "^3.7.4",
     "vitest": "^4.0.16"
-  },
-  "dependencies": {
-    "dotenv": "^17.2.3",
-    "mongoose": "^9.1.1",
-    "rpc-websockets": "^9.3.2",
-    "uuid": "^13.0.0"
   }
 }

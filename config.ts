@@ -1,4 +1,12 @@
-import "dotenv/config";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const rootDir = path.dirname(fileURLToPath(import.meta.url));
+dotenv.config({
+  path: path.join(rootDir, ".env"),
+  quiet: true,
+});
 
 function getEnvVariable(key: string) {
   const value = process.env[key];

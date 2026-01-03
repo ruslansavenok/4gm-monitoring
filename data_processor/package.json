@@ -1,0 +1,12 @@
+{
+  "name": "data_processor",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "bun ./index.ts"
+  },
+  "dependencies": {
+    "rpc-websockets": "^9.3.2",
+    "uuid": "^13.0.0"
+  }
+}
