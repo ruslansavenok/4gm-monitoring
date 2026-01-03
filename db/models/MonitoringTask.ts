@@ -4,8 +4,8 @@ const monitoringTaskSchema = new mongoose.Schema(
   {
     serverId: { type: Number, required: true, index: true },
     itemId: { type: Number, required: true, index: true },
-    lastCheckedAt: { type: Date },
-    checkFrequencySec: { type: Number, required: true },
+    lastCheckedAt: { type: Date, required: true, default: null },
+    checkFrequencySec: { type: Number, required: true, default: 300 },
   },
   {
     timestamps: true,
@@ -20,7 +20,6 @@ const monitoringTaskSchema = new mongoose.Schema(
         const now = new Date();
         return this.find({
           $or: [
-            { lastCheckedAt: { $exists: false } },
             { lastCheckedAt: null },
             {
               $expr: {
