@@ -1,6 +1,7 @@
 import * as api from "./rpc_client";
 import { setupMongoConnection } from "../db/connection";
 import { PrivateListing, generateListingId } from "../db/models/PrivateListing";
+import { MonitoringTask } from "../db/models/MonitoringTask";
 
 async function fetchAndProcessListings(serverId: number, itemId: number) {
   const rawListings = await api.gameSignalPredicate({ serverId, itemId });
@@ -18,6 +19,10 @@ async function fetchAndProcessListings(serverId: number, itemId: number) {
     }),
     { ordered: false },
   );
+  await MonitoringTask.updateOne(
+    { serverId, itemId },
+    { $set: { lastCheckedAt: Date.now() } },
+  );
   return rawListings;
 }
 
@@ -25,14 +30,20 @@ async function fetchAndProcessListings(serverId: number, itemId: number) {
   await setupMongoConnection();
   console.log("Mongo connected!");
 
+  const tasks = await MonitoringTask.find();
+  console.log(`Found ${tasks.length} monitoring tasks`);
+
   api.client.on("open", async () => {
-    const listings = await fetchAndProcessListings(45, 48493);
-    console.table(
-      listings.map((item) => ({
-        ...item,
-        price: item.price.toLocaleString(),
-      })),
-    );
+    for (const { serverId, itemId } of tasks) {
+      console.log(`Processing task: serverId=${serverId}, itemId=${itemId}`);
+      const listings = await fetchAndProcessListings(serverId, itemId);
+      console.table(
+        listings.map((item) => ({
+          ...item,
+          price: item.price.toLocaleString(),
+        })),
+      );
+    }
   });
   api.client.connect();
 })();
