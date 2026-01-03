@@ -20,6 +20,11 @@ export function stringPriceToNumber(value: string) {
 export function ruListingWhenToDate(value: string) {
   const now = new Date();
 
+  // Handle "только что" (just now)
+  if (value === "только что") {
+    return now;
+  }
+
   // Handle relative time: "5 минут назад", "2 часа назад", "3 дня назад"
   const relativeMatch = value.match(/^(\d+)\s+(\S+)\s+назад$/);
   if (relativeMatch) {

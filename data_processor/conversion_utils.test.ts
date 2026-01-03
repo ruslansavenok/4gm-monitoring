@@ -22,6 +22,9 @@ describe("ruListingWhenToDate", () => {
   });
 
   const testCases: { input: string; expected: Date | string }[] = [
+    // Just now
+    { input: "только что", expected: new Date("2026-01-03T12:30:00.000Z") },
+
     // Relative time - minutes
     { input: "1 минуту назад", expected: new Date("2026-01-03T12:29:00.000Z") },
     { input: "5 минут назад", expected: new Date("2026-01-03T12:25:00.000Z") },
