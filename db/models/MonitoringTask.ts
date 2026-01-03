@@ -17,7 +17,7 @@ const monitoringTaskSchema = new mongoose.Schema(
         );
       },
       findDueTasks() {
-        const now = Date.now();
+        const now = new Date();
         return this.find({
           $or: [
             { lastCheckedAt: { $exists: false } },
@@ -27,10 +27,11 @@ const monitoringTaskSchema = new mongoose.Schema(
                 $lte: [
                   "$lastCheckedAt",
                   {
-                    $subtract: [
-                      now,
-                      { $multiply: ["$checkFrequencySec", 1000] },
-                    ],
+                    $dateSubtract: {
+                      startDate: now,
+                      unit: "second",
+                      amount: "$checkFrequencySec",
+                    },
                   },
                 ],
               },
