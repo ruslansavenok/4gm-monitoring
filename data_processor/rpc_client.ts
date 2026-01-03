@@ -5,7 +5,7 @@ import {
 } from "rpc-websockets";
 import { v4 as uuidv4 } from "uuid";
 import { SOCKET_URL, SOCKET_USER_ID, DEBUG_ENABLED } from "../config";
-import { stringPriceToNumber, ruTimeAgoToDate } from "./data_conversion";
+import { stringPriceToNumber, ruListingWhenToDate } from "./data_conversion";
 
 export const client = new RPCSocketClient(
   WebSocket as ICommonWebSocketFactory,
@@ -50,7 +50,7 @@ interface GameSignalPredicateResponse {
       price: string;
       when: string;
       name: string;
-      characterName: string;
+      characterName: string; // this is missing when Worldwide
       enchant: string;
     };
   }[];
@@ -62,7 +62,8 @@ export async function gameSignalPredicate({ itemId }: { itemId: number }) {
     lang: "ru",
     options: {
       3: {
-        0: "Private",
+        0: "Private", // Private or Worldwide
+        1: "Sell", // Sell or Buy
       },
     },
     parameters: {
@@ -76,7 +77,7 @@ export async function gameSignalPredicate({ itemId }: { itemId: number }) {
 
   return response.items.map(({ data }) => ({
     price: stringPriceToNumber(data.price),
-    seenAt: ruTimeAgoToDate(data.when),
+    seenAt: ruListingWhenToDate(data.when),
     characterName: data.characterName,
     enchant: data.enchant,
   }));
