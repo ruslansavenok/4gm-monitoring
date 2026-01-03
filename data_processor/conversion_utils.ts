@@ -1,4 +1,4 @@
-const RU_MONTHS = {
+const RU_MONTHS: Record<string, number> = {
   января: 0,
   февраля: 1,
   марта: 2,

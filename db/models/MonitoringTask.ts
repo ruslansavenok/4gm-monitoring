@@ -9,6 +9,36 @@ const monitoringTaskSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    statics: {
+      markChecked(serverId: number, itemId: number) {
+        return this.updateOne(
+          { serverId, itemId },
+          { $set: { lastCheckedAt: Date.now() } },
+        );
+      },
+      findDueTasks() {
+        const now = Date.now();
+        return this.find({
+          $or: [
+            { lastCheckedAt: { $exists: false } },
+            { lastCheckedAt: null },
+            {
+              $expr: {
+                $lte: [
+                  "$lastCheckedAt",
+                  {
+                    $subtract: [
+                      now,
+                      { $multiply: ["$checkFrequencySec", 1000] },
+                    ],
+                  },
+                ],
+              },
+            },
+          ],
+        });
+      },
+    },
   },
 );
 

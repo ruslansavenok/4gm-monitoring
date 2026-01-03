@@ -1,5 +1,12 @@
 import mongoose from "mongoose";
 
+type RawListing = {
+  seenAt: Date;
+  price: number;
+  enchant: number;
+  characterName: string;
+};
+
 const privateListingSchema = new mongoose.Schema(
   {
     _id: { type: String },
@@ -14,6 +21,24 @@ const privateListingSchema = new mongoose.Schema(
     timestamps: {
       createdAt: true,
       updatedAt: false,
+    },
+    statics: {
+      syncData(serverId: number, itemId: number, rawListings: RawListing[]) {
+        return this.bulkWrite(
+          rawListings.map((item) => {
+            const doc = { serverId, itemId, ...item };
+            const _id = generateListingId(doc);
+            return {
+              updateOne: {
+                filter: { _id },
+                update: { $setOnInsert: { _id, ...doc } },
+                upsert: true,
+              },
+            };
+          }),
+          { ordered: false },
+        );
+      },
     },
   },
 );
