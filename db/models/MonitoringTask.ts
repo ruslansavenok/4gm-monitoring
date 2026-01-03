@@ -4,7 +4,7 @@ const monitoringTaskSchema = new mongoose.Schema(
   {
     serverId: { type: Number, required: true, index: true },
     itemId: { type: Number, required: true, index: true },
-    lastCheckedAt: { type: Number },
+    lastCheckedAt: { type: Date },
     checkFrequencySec: { type: Number, required: true },
   },
   {
@@ -13,7 +13,7 @@ const monitoringTaskSchema = new mongoose.Schema(
       markChecked(serverId: number, itemId: number) {
         return this.updateOne(
           { serverId, itemId },
-          { $set: { lastCheckedAt: Date.now() } },
+          { $set: { lastCheckedAt: new Date() } },
         );
       },
       findDueTasks() {
