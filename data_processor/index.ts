@@ -1,13 +1,22 @@
 import * as api from "./rpc_client";
+import { setupMongoConnection } from "../db/connection";
+import { PrivateListing } from "../db/models/PrivateListing";
 
-api.client.on("open", async function () {
-  const items = await api.gameSignalPredicate({
-    itemId: 48493,
+(async () => {
+  await setupMongoConnection();
+  console.log("Mongo connected!");
+
+  api.client.on("open", async () => {
+    const itemId = 48493;
+    const rawListings = await api.gameSignalPredicate({ itemId });
+    const privateListings = rawListings.map((item) => ({ ...item, itemId }));
+    await PrivateListing.insertMany(privateListings);
+    console.table(
+      rawListings.map((item) => ({
+        ...item,
+        price: item.price.toLocaleString(),
+      })),
+    );
   });
-  console.table(
-    items.map((row) => ({
-      ...row,
-      price: row.price.toLocaleString(),
-    })),
-  );
-});
+  api.client.connect();
+})();

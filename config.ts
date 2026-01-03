@@ -8,10 +8,12 @@ function getEnvVariable(key: string) {
   return value;
 }
 
-function isTrue(value: string) {
-  return ["1", "true"].includes(value.toLowerCase());
+function isTrue(value?: string) {
+  return value ? ["1", "true"].includes(value.toLowerCase()) : false;
 }
 
-export const SOCKET_URL = getEnvVariable("4GM_SOCKET_URL");
-export const SOCKET_USER_ID = parseInt(getEnvVariable("4GM_SOCKET_USER_ID"));
-export const DEBUG_ENABLED = isTrue(getEnvVariable("4GM_DEBUG"));
+export const DEBUG_ENABLED = isTrue(process.env["DEBUG"]);
+
+export const MONGO_DB_URL = getEnvVariable("MONGODB_URL");
+export const SOCKET_URL = getEnvVariable("SOCKET_URL");
+export const SOCKET_USER_ID = parseInt(getEnvVariable("SOCKET_USER_ID"));

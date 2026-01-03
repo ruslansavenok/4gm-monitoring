@@ -10,7 +10,9 @@ import { stringPriceToNumber, ruListingWhenToDate } from "./data_conversion";
 export const client = new RPCSocketClient(
   WebSocket as ICommonWebSocketFactory,
   SOCKET_URL,
-  {},
+  {
+    autoconnect: false,
+  },
   () => uuidv4(),
   {
     encode(value) {
