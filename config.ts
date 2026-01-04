@@ -1,10 +1,8 @@
 import dotenv from "dotenv";
 import path from "path";
-import { fileURLToPath } from "url";
 
-const rootDir = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({
-  path: path.join(rootDir, ".env"),
+  path: path.join(__dirname, ".env"),
   quiet: true,
 });
 
