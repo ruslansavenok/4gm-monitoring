@@ -1,4 +1,4 @@
-import { DEBUG_ENABLED } from "./config.js";
+import { DEBUG_ENABLED } from "./config";
 
 function logMessage(...args: any) {
   const date = new Date().toISOString();

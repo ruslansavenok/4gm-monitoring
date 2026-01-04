@@ -2,8 +2,7 @@ import dotenv from "dotenv";
 import path from "path";
 
 dotenv.config({
-  path: path.join(__dirname, ".env"),
-  quiet: true,
+  path: path.resolve(process.cwd(), "..", ".env"),
 });
 
 function getEnvVariable(key: string) {

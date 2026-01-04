@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "type": "module",
   "workspaces": [
-    "data_processor"
+    "data_processor",
+    "ui"
   ],
   "scripts": {
     "parser:start": "npm run start -w data_processor",
+    "ui:dev": "npm run dev -w ui",
     "test": "vitest run",
     "prepare": "husky"
   },

@@ -4,8 +4,8 @@ import {
   type ICommonWebSocketFactory,
 } from "rpc-websockets";
 import { v4 as uuidv4 } from "uuid";
-import { SOCKET_URL, SOCKET_USER_ID } from "../config";
-import logger from "../logger";
+import { SOCKET_URL, SOCKET_USER_ID } from "../shared/config";
+import logger from "../shared/logger";
 import { stringPriceToNumber, ruListingWhenToDate } from "./conversion_utils";
 
 const RPC_CALL_TIMEOUT = 5_000;

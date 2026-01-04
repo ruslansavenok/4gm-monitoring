@@ -2,7 +2,7 @@ import * as api from "./rpc_client";
 import { setupMongoConnection } from "../db/connection";
 import { PrivateListing } from "../db/models/PrivateListing";
 import { MonitoringTask } from "../db/models/MonitoringTask";
-import logger from "../logger";
+import logger from "../shared/logger";
 
 let isInitialized = false;
 let isProcessing = false;
