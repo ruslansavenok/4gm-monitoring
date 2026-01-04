@@ -5,27 +5,29 @@ import {
 } from "rpc-websockets";
 import { v4 as uuidv4 } from "uuid";
 import { SOCKET_URL, SOCKET_USER_ID, DEBUG_ENABLED } from "../config";
+import logger from "../logger";
 import { stringPriceToNumber, ruListingWhenToDate } from "./conversion_utils";
+
+const RPC_CALL_TIMEOUT = 5_000;
 
 export const client = new RPCSocketClient(
   WebSocket as ICommonWebSocketFactory,
   SOCKET_URL,
   {
     autoconnect: false,
+    reconnect: true,
+    reconnect_interval: 10_000,
+    max_reconnects: 5,
   },
   () => uuidv4(),
   {
     encode(value) {
       const data = JSON.stringify(value);
-      if (DEBUG_ENABLED) {
-        console.log("[WS OUT]", data);
-      }
+      logger.debug(`[WS OUT] ${data}`);
       return data;
     },
     decode(value) {
-      if (DEBUG_ENABLED) {
-        console.log("[WS IN]", value);
-      }
+      logger.debug(`[WS IN] ${value}`);
       return JSON.parse(value);
     },
   },
@@ -66,22 +68,26 @@ export async function gameSignalPredicate({
   serverId: number;
   itemId: number;
 }) {
-  const response = (await client.call("executeGameSignalPredicate", {
-    lang: "ru",
-    options: {
-      3: {
-        0: "Private", // Private or Worldwide
-        1: "Sell", // Sell or Buy
+  const response = (await client.call(
+    "executeGameSignalPredicate",
+    {
+      lang: "ru",
+      options: {
+        3: {
+          0: "Private", // Private or Worldwide
+          1: "Sell", // Sell or Buy
+        },
       },
+      parameters: {
+        1: itemId,
+        2: serverId,
+      },
+      signalId: 1196,
+      toPartnerId: "l2-ru",
+      userId: SOCKET_USER_ID,
     },
-    parameters: {
-      1: itemId,
-      2: serverId,
-    },
-    signalId: 1196,
-    toPartnerId: "l2-ru",
-    userId: SOCKET_USER_ID,
-  })) as GameSignalPredicateResponse;
+    RPC_CALL_TIMEOUT,
+  )) as GameSignalPredicateResponse;
 
   return response.items.map(({ data }) => ({
     price: stringPriceToNumber(data.price),
