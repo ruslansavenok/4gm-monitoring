@@ -4,11 +4,13 @@
   "type": "module",
   "workspaces": [
     "data_processor",
-    "ui"
+    "ui",
+    "items_scraper"
   ],
   "scripts": {
     "parser:start": "npm run start -w data_processor",
     "ui:dev": "npm run dev -w ui",
+    "items_scraper:start": "npm run start -w items_scraper",
     "test": "vitest run",
     "prepare": "husky"
   },

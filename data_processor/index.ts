@@ -7,6 +7,8 @@ import logger from "../shared/logger";
 let isInitialized = false;
 let isProcessing = false;
 
+// TODO: consider renaming this workspace
+// eg listing_processor
 (async () => {
   await setupMongoConnection();
 
