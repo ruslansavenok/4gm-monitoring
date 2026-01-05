@@ -1,0 +1,11 @@
+{
+  "name": "items_parser",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "decode": "node decode.js"
+  },
+  "dependencies": {
+    "bn.js": "^5.2.1"
+  }
+}
