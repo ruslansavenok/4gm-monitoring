@@ -11,6 +11,7 @@ const IS_REFRESHING_EXISTING = true;
 // There's a much faster way to do it - parse game client file
 // https://github.com/ritsuwastaken/open-l2encdec
 // https://github.com/gyod/L2Dat_EncDec/blob/master/l2datencdec
+// Strucs that will be needed: ItemName, EtcItemGrp, WeaponGrp and ArmorGrp
 (async () => {
   try {
     await setupMongoConnection();
