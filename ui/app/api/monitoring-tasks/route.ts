@@ -3,6 +3,9 @@ import { MonitoringTask } from "../../../../db/models/MonitoringTask";
 
 const SERVER_ID = 45;
 
+// TODO:
+// - Move to server actions
+// - move already exist error as mongo should throw it instead
 export async function POST(request: NextRequest) {
   const body = await request.json();
   const { itemId, checkFrequencySec } = body;
@@ -39,7 +42,6 @@ export async function POST(request: NextRequest) {
     serverId: SERVER_ID,
     itemId: itemId,
     checkFrequencySec: checkFrequencySec,
-    // lastCheckedAt: null,
   });
 
   return NextResponse.json({
