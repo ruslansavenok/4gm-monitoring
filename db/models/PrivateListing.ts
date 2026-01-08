@@ -64,7 +64,6 @@ export function generateListingId(listing: {
     .join(",");
 }
 
-export const PrivateListing = mongoose.model(
-  "PrivateListing",
-  privateListingSchema,
-);
+export const PrivateListing =
+  mongoose.models.PrivateListing ||
+  mongoose.model("PrivateListing", privateListingSchema);

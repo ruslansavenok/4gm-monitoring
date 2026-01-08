@@ -7,4 +7,4 @@ const itemSchema = new mongoose.Schema({
   iconPanel: { type: String },
 });
 
-export const Item = mongoose.model("Item", itemSchema);
+export const Item = mongoose.models.Item || mongoose.model("Item", itemSchema);
