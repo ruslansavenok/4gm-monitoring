@@ -9,6 +9,13 @@ export class ItemNotFoundError extends Error {
   }
 }
 
+export class ItemUntradableError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "ItemUntradableError";
+  }
+}
+
 export interface ScrapedItem {
   _id: number;
   name: string;
@@ -58,9 +65,20 @@ export async function scrapeItem(id: number): Promise<ScrapedItem> {
     throw new ItemNotFoundError(`Item ${id} not found (404 page)`);
   }
 
+  const firstCanOption = $(".options-title.title-can + ul li")
+    .first()
+    .text()
+    .trim();
+  if (firstCanOption !== "Обменять") {
+    throw new ItemUntradableError(`Item ${id} is untradable`);
+  }
+
   const name = $("h1.item-desc").text().trim();
-  const iconSrc = $(".item-icon .icon").attr("src");
-  const iconPanelSrc = $(".item-icon .icon-panel").attr("src");
+  const iconSrc = $(".item-icon .icon").attr("src")?.split("/").pop();
+  const iconPanelSrc = $(".item-icon .icon-panel")
+    .attr("src")
+    ?.split("/")
+    .pop();
 
   if (!name || !iconSrc) {
     throw new Error(

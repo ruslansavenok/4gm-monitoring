@@ -1,6 +1,6 @@
 import { setupMongoConnection } from "../db/connection";
 import { Item } from "../db/models/Item";
-import { scrapeItem, ItemNotFoundError } from "./scraper";
+import { scrapeItem, ItemNotFoundError, ItemUntradableError } from "./scraper";
 import WorkQueue from "./work_queue";
 import logger from "../shared/logger";
 
@@ -56,6 +56,11 @@ async function processWorker(queue: WorkQueue, workerId: number) {
     } catch (error) {
       if (error instanceof ItemNotFoundError) {
         logger.info(`Worker ${workerId} item ${id} not found`);
+      } else if (error instanceof ItemUntradableError) {
+        logger.info(
+          `Worker ${workerId} item ${id} is untradable, deleting if exists`,
+        );
+        await Item.deleteOne({ _id: id });
       } else {
         logger.info(`Worker ${workerId} error scraping item ${id}: ${error}`);
       }
