@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { PriceChart } from "./PriceChart";
 import { Filters, FilterValues, DEFAULT_FILTERS } from "./Filters";
+import { ItemIcon } from "./ItemIcon";
 
 interface Listing {
   _id: string;
@@ -61,11 +62,7 @@ export function ContentSection({
     <div className="p-6">
       <header className="mb-6">
         <div className="flex items-center gap-3">
-          <img
-            src={`${selectedItem.icon.replace("/upload/images/icon/", "https://lutk.ru/Icon/Texture/")}`}
-            alt=""
-            className="w-10 h-10 rounded"
-          />
+          <ItemIcon item={selectedItem} className="w-10 h-10" />
           <h2 className="text-xl font-semibold text-slate-100">
             {selectedItem.name}
           </h2>

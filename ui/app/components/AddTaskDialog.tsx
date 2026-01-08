@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
+import { ItemIcon } from "./ItemIcon";
 
 type Item = {
   _id: number;
@@ -131,14 +132,7 @@ export function AddTaskDialog({
             </label>
             {selectedItem ? (
               <div className="flex items-center gap-3 px-3 py-2 bg-slate-800 border border-slate-600 rounded-md">
-                <img
-                  src={selectedItem.icon.replace(
-                    "/upload/images/icon/",
-                    "https://lutk.ru/Icon/Texture/",
-                  )}
-                  alt=""
-                  className="w-6 h-6 rounded"
-                />
+                <ItemIcon item={selectedItem} />
                 <span className="flex-1 text-sm text-slate-200">
                   {selectedItem.name}
                 </span>
@@ -187,14 +181,7 @@ export function AddTaskDialog({
                           onClick={() => handleSelectItem(item)}
                           className="w-full flex items-center gap-3 px-3 py-2 text-left hover:bg-slate-700 transition-colors"
                         >
-                          <img
-                            src={item.icon.replace(
-                              "/upload/images/icon/",
-                              "https://lutk.ru/Icon/Texture/",
-                            )}
-                            alt=""
-                            className="w-6 h-6 rounded"
-                          />
+                          <ItemIcon item={item} />
                           <span className="text-sm text-slate-200">
                             {item.name}
                           </span>

@@ -4,6 +4,7 @@ import { MonitoringTask } from "../../db/models/MonitoringTask";
 import { PrivateListing } from "../../db/models/PrivateListing";
 import { ContentSection } from "./components/ContentSection";
 import { AddTaskButton } from "./components/AddTaskButton";
+import { ItemIcon } from "./components/ItemIcon";
 
 const SERVER_ID = 45;
 
@@ -99,11 +100,7 @@ export default async function HomePage({
                           : "text-slate-300 hover:bg-slate-800 hover:text-slate-100"
                       }`}
                     >
-                      <img
-                        src={`${item.icon.replace("/upload/images/icon/", "https://lutk.ru/Icon/Texture/")}`}
-                        alt=""
-                        className="w-8 h-8 rounded"
-                      />
+                      <ItemIcon item={item} className="w-8 h-8" />
                       <span className="text-sm font-medium truncate">
                         {item.name}
                       </span>

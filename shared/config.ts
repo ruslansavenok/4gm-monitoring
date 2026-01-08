@@ -25,4 +25,7 @@ export const SOCKET_URL = getEnvVariable("SOCKET_URL");
 export const SOCKET_USER_ID = parseInt(getEnvVariable("SOCKET_USER_ID"));
 
 export const ITEMS_SCRAPER_HOSTNAME = getEnvVariable("ITEMS_SCRAPER_HOSTNAME");
-export const ITEM_ICON_BASE_URL = getEnvVariable("ITEM_ICON_BASE_URL");
+
+// TODO: fix this
+// just to ensure we don't skip anything for the next app
+getEnvVariable("NEXT_PUBLIC_ICON_BASE_URL");
