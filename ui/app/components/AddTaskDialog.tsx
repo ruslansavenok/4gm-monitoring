@@ -25,16 +25,18 @@ export function AddTaskDialog({
   const [showSuggestions, setShowSuggestions] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Filter items client-side
+  // Filter items client-side with multi-word search
   const filteredItems = useMemo(() => {
     if (!searchQuery.trim() || selectedItem) return [];
 
-    const query = searchQuery.toLowerCase();
     const numericQuery = parseInt(searchQuery, 10);
+    const queryWords = searchQuery.toLowerCase().split(/\s+/).filter(Boolean);
 
     return allItems
       .filter((item) => {
-        const nameMatch = item.name.toLowerCase().includes(query);
+        const nameLower = item.name.toLowerCase();
+        // All query words must appear in the name
+        const nameMatch = queryWords.every((word) => nameLower.includes(word));
         const idMatch = !isNaN(numericQuery) && item._id === numericQuery;
         return nameMatch || idMatch;
       })
