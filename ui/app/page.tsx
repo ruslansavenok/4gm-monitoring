@@ -73,6 +73,7 @@ export default async function HomePage({
                   <li key={item._id}>
                     <Link
                       href={`?itemId=${item._id}`}
+                      title={item.name}
                       className={`flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${
                         isActive
                           ? "bg-blue-500/15 text-blue-400"
