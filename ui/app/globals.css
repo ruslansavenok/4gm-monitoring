@@ -1,1 +1,32 @@
 @import "tailwindcss";
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-slate-600) var(--color-slate-800);
+}
+
+/* WebKit browsers (Chrome, Safari, Edge) */
+/* Setting background forces Chrome to use custom scrollbar instead of overlay */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background: var(--color-slate-900);
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--color-slate-800);
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--color-slate-600);
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--color-blue-500);
+}
+
+*::-webkit-scrollbar-corner {
+  background: var(--color-slate-800);
+}
