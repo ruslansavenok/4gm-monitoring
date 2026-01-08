@@ -1,2 +1,5 @@
-prettier -w .
-git add -u
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACMR)
+if [ -n "$STAGED_FILES" ]; then
+  echo "$STAGED_FILES" | xargs prettier --write --ignore-unknown
+  echo "$STAGED_FILES" | xargs git add
+fi
