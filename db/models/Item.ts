@@ -1,5 +1,6 @@
 import mongoose, { InferSchemaType } from "mongoose";
 
+// TODO: refactor to GameItem
 const itemSchema = new mongoose.Schema({
   _id: { type: Number, required: true },
   name: { type: String, required: true },
