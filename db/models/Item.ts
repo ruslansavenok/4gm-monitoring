@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { InferSchemaType } from "mongoose";
 
 const itemSchema = new mongoose.Schema({
   _id: { type: Number, required: true },
@@ -7,4 +7,5 @@ const itemSchema = new mongoose.Schema({
   iconPanel: { type: String },
 });
 
+export type ItemType = InferSchemaType<typeof itemSchema>;
 export const Item = mongoose.models.Item || mongoose.model("Item", itemSchema);

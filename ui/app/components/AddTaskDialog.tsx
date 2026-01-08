@@ -2,18 +2,13 @@
 
 import { useState, useEffect, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
+import type { ItemType } from "../../../db/models/Item";
 import { ItemIcon } from "./ItemIcon";
-
-type Item = {
-  _id: number;
-  name: string;
-  icon: string;
-};
 
 type AddTaskDialogProps = {
   isOpen: boolean;
   onClose: () => void;
-  allItems: Item[];
+  allItems: ItemType[];
 };
 
 export function AddTaskDialog({
@@ -23,7 +18,7 @@ export function AddTaskDialog({
 }: AddTaskDialogProps) {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+  const [selectedItem, setSelectedItem] = useState<ItemType | null>(null);
   const [checkFrequency, setCheckFrequency] = useState(300);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -58,7 +53,7 @@ export function AddTaskDialog({
     }
   }, [isOpen]);
 
-  const handleSelectItem = (item: Item) => {
+  const handleSelectItem = (item: ItemType) => {
     setSelectedItem(item);
     setSearchQuery(item.name);
     setShowSuggestions(false);

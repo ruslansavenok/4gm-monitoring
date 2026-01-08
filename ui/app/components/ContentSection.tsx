@@ -4,6 +4,8 @@ import { useState, useMemo } from "react";
 import { PriceChart } from "./PriceChart";
 import { Filters, FilterValues, DEFAULT_FILTERS } from "./Filters";
 import { ItemIcon } from "./ItemIcon";
+import type { ItemType } from "../../../db/models/Item";
+import { useItems } from "../context/ItemsContext";
 
 interface Listing {
   _id: string;
@@ -13,14 +15,8 @@ interface Listing {
   enchant: number;
 }
 
-interface Item {
-  _id: number;
-  name: string;
-  icon: string;
-}
-
 interface ContentSectionProps {
-  selectedItem: Item;
+  selectedItemId: number;
   listings: Listing[];
 }
 
@@ -48,9 +44,11 @@ function formatDate(date: string): string {
 }
 
 export function ContentSection({
-  selectedItem,
+  selectedItemId,
   listings,
 }: ContentSectionProps) {
+  const { getItemById } = useItems();
+  const selectedItem = getItemById(selectedItemId);
   const [filters, setFilters] = useState<FilterValues>(DEFAULT_FILTERS);
 
   const filteredListings = useMemo(

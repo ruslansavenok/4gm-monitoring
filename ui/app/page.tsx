@@ -24,9 +24,6 @@ export default async function HomePage({
   }).distinct("itemId");
   const items = await Item.find({ _id: { $in: taskItemIds } }).lean();
 
-  // Get all items for the autocomplete
-  const allItems = await Item.find({}).lean();
-
   // Get listings for selected item
   let listings: Array<{
     _id?: string | null;
@@ -52,24 +49,6 @@ export default async function HomePage({
     price: l.price,
     enchant: l.enchant,
     characterName: l.characterName ?? "",
-  }));
-
-  const selectedItem = items.find((item) => item._id === selectedItemId);
-
-  // Serialize selectedItem for client component
-  const serializedSelectedItem = selectedItem
-    ? {
-        _id: selectedItem._id,
-        name: selectedItem.name,
-        icon: selectedItem.icon,
-      }
-    : null;
-
-  // Serialize all items for autocomplete
-  const serializedAllItems = allItems.map((item) => ({
-    _id: item._id,
-    name: item.name,
-    icon: item.icon,
   }));
 
   return (
@@ -112,15 +91,15 @@ export default async function HomePage({
           )}
         </nav>
         <div className="p-3 border-t border-slate-800">
-          <AddTaskButton allItems={serializedAllItems} />
+          <AddTaskButton />
         </div>
       </aside>
 
       {/* Content */}
       <main className="flex-1 overflow-y-auto">
-        {selectedItemId && serializedSelectedItem ? (
+        {selectedItemId ? (
           <ContentSection
-            selectedItem={serializedSelectedItem}
+            selectedItemId={selectedItemId}
             listings={chartListings}
           />
         ) : (
