@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useGameItems } from "../context/GameItemsContext";
-import type { GameItemType } from "../../../db/models/GameItem";
+import type { GameItem } from "../../../db/models/GameItem";
 import { ItemIcon } from "./ItemIcon";
 import { createMonitoringTask } from "../actions/monitoring-tasks";
 
@@ -17,7 +17,7 @@ export function AddTaskDialog({
   const router = useRouter();
   const { gameItems } = useGameItems();
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedItem, setSelectedItem] = useState<GameItemType | null>(null);
+  const [selectedItem, setSelectedItem] = useState<GameItem | null>(null);
   const [checkFrequency, setCheckFrequency] = useState(300);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -54,7 +54,7 @@ export function AddTaskDialog({
     }
   }, [isOpen]);
 
-  const handleSelectItem = (item: GameItemType) => {
+  const handleSelectItem = (item: GameItem) => {
     setSelectedItem(item);
     setSearchQuery(item.name);
     setShowSuggestions(false);

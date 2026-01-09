@@ -64,7 +64,7 @@ export function generateListingId(listing: {
     .join(",");
 }
 
-export const PrivateListing = mongoose.model(
+export const PrivateListingModel = mongoose.model(
   "PrivateListing",
   privateListingSchema,
 );

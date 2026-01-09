@@ -1,7 +1,7 @@
 import * as api from "./rpc_client";
 import { setupMongoConnection } from "../db/connection";
-import { PrivateListing } from "../db/models/PrivateListing";
-import { MonitoringTask } from "../db/models/MonitoringTask";
+import { PrivateListingModel } from "../db/models/PrivateListing";
+import { MonitoringTaskModel } from "../db/models/MonitoringTask";
 import logger from "../shared/logger";
 
 let isInitialized = false;
@@ -43,14 +43,14 @@ async function processDueTasks() {
   isProcessing = true;
 
   try {
-    const tasks = await MonitoringTask.findDueTasks();
+    const tasks = await MonitoringTaskModel.findDueTasks();
     logger.info(`Found ${tasks.length} due tasks`);
 
     for (const { serverId, itemId } of tasks) {
       logger.info(`Processing task: serverId=${serverId}, itemId=${itemId}`);
       const rawListings = await api.gameSignalPredicate({ serverId, itemId });
-      await PrivateListing.syncData(serverId, itemId, rawListings);
-      await MonitoringTask.markChecked(serverId, itemId);
+      await PrivateListingModel.syncData(serverId, itemId, rawListings);
+      await MonitoringTaskModel.markChecked(serverId, itemId);
     }
   } catch (error) {
     logger.info(`Failed: ${error}`);

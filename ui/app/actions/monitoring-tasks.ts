@@ -1,7 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { MonitoringTask } from "../../../db/models/MonitoringTask";
+import { MonitoringTaskModel } from "../../../db/models/MonitoringTask";
 
 const SERVER_ID = 45;
 
@@ -9,7 +9,7 @@ export async function createMonitoringTask(
   itemId: number,
   checkFrequencySec: number,
 ) {
-  await MonitoringTask.create({
+  await MonitoringTaskModel.create({
     serverId: SERVER_ID,
     itemId: itemId,
     checkFrequencySec: checkFrequencySec,
@@ -17,7 +17,7 @@ export async function createMonitoringTask(
 }
 
 export async function deleteMonitoringTask(itemId: number) {
-  await MonitoringTask.deleteOne({
+  await MonitoringTaskModel.deleteOne({
     serverId: SERVER_ID,
     itemId: itemId,
   });

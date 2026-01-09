@@ -7,5 +7,5 @@ const gameItemSchema = new mongoose.Schema({
   iconPanel: { type: String },
 });
 
-export type GameItemType = InferSchemaType<typeof gameItemSchema>;
-export const GameItem = mongoose.model("GameItem", gameItemSchema);
+export type GameItem = InferSchemaType<typeof gameItemSchema>;
+export const GameItemModel = mongoose.model("GameItem", gameItemSchema);

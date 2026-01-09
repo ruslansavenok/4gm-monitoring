@@ -7,11 +7,11 @@ import {
   useMemo,
   useCallback,
 } from "react";
-import type { GameItemType } from "../../../db/models/GameItem";
+import type { GameItem } from "../../../db/models/GameItem";
 
 interface GameItemsContextType {
-  gameItems: GameItemType[];
-  gameItemsById: Record<number, GameItemType>;
+  gameItems: GameItem[];
+  gameItemsById: Record<number, GameItem>;
 }
 
 const GameItemsContext = createContext<GameItemsContextType>(null!);
@@ -21,10 +21,10 @@ export function GameItemsProvider({
   gameItems,
 }: {
   children: ReactNode;
-  gameItems: GameItemType[];
+  gameItems: GameItem[];
 }) {
   const value = useMemo(() => {
-    const gameItemsById: Record<number, GameItemType> = {};
+    const gameItemsById: Record<number, GameItem> = {};
     for (const gameItem of gameItems) {
       gameItemsById[gameItem._id] = gameItem;
     }

@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { GameItem } from "../../db/models/GameItem";
-import { MonitoringTask } from "../../db/models/MonitoringTask";
-import { PrivateListing } from "../../db/models/PrivateListing";
+import { GameItemModel } from "../../db/models/GameItem";
+import { MonitoringTaskModel } from "../../db/models/MonitoringTask";
+import { PrivateListingModel } from "../../db/models/PrivateListing";
 import { ContentSection } from "./components/ContentSection";
 import { AddTaskButton } from "./components/AddTaskButton";
 import { ItemIcon } from "./components/ItemIcon";
@@ -19,10 +19,10 @@ export default async function HomePage({
   const selectedItemId = itemId ? parseInt(itemId, 10) : null;
 
   // Get items that have monitoring tasks for this server
-  const taskItemIds = await MonitoringTask.find({
+  const taskItemIds = await MonitoringTaskModel.find({
     serverId: SERVER_ID,
   }).distinct("itemId");
-  const items = await GameItem.find({ _id: { $in: taskItemIds } }).lean();
+  const items = await GameItemModel.find({ _id: { $in: taskItemIds } }).lean();
 
   // Get listings for selected item
   let listings: Array<{
@@ -34,7 +34,7 @@ export default async function HomePage({
   }> = [];
 
   if (selectedItemId) {
-    listings = await PrivateListing.find({
+    listings = await PrivateListingModel.find({
       serverId: SERVER_ID,
       itemId: selectedItemId,
     })

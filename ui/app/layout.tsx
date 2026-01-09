@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { setupMongoConnection } from "../../db/connection";
-import { GameItem, type GameItemType } from "../../db/models/GameItem";
+import { GameItemModel, type GameItem } from "../../db/models/GameItem";
 import { GameItemsProvider } from "./context/GameItemsContext";
 import "./globals.css";
 
@@ -17,7 +17,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   await setupMongoConnection();
-  const gameItems = (await GameItem.find({}).lean()) as GameItemType[];
+  const gameItems = (await GameItemModel.find({}).lean()) as GameItem[];
 
   return (
     <html lang="en">
