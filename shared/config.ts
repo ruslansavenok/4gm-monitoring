@@ -24,6 +24,9 @@ export const MONGO_DB_URL = getEnvVariable("MONGODB_URL");
 export const SOCKET_URL = getEnvVariable("SOCKET_URL");
 export const SOCKET_USER_ID = parseInt(getEnvVariable("SOCKET_USER_ID"));
 
-// TODO: GameItem
-export const ITEMS_SCRAPER_HOSTNAME = getEnvVariable("ITEMS_SCRAPER_HOSTNAME");
-export const ITEM_ICON_BASE_URL = getEnvVariable("ITEM_ICON_BASE_URL");
+export const GAME_ITEMS_PARSER_BASE_URL = getEnvVariable(
+  "GAME_ITEMS_PARSER_BASE_URL",
+);
+export const GAME_ITEM_ICON_BASE_URL = getEnvVariable(
+  "GAME_ITEM_ICON_BASE_URL",
+);

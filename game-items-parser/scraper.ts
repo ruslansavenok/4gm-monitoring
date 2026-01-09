@@ -1,5 +1,5 @@
 import * as cheerio from "cheerio";
-import { ITEMS_SCRAPER_HOSTNAME } from "../shared/config";
+import { GAME_ITEMS_PARSER_BASE_URL } from "../shared/config";
 import logger from "../shared/logger";
 
 export class ItemNotFoundError extends Error {
@@ -24,7 +24,7 @@ export interface ScrapedItem {
 }
 
 export async function scrapeItem(id: number): Promise<ScrapedItem> {
-  const url = `${ITEMS_SCRAPER_HOSTNAME}/main/items/${id}.html`;
+  const url = `${GAME_ITEMS_PARSER_BASE_URL}/main/items/${id}.html`;
   const startTime = Date.now();
   const response = await fetch(url, {
     headers: {
