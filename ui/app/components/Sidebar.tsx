@@ -15,9 +15,9 @@ export function Sidebar({
   monitoredGameItemIds,
   selectedGameItemId,
 }: SidebarProps) {
-  const { getGameItemById } = useGameItems();
+  const { gameItemsById } = useGameItems();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const items = monitoredGameItemIds.map((id) => getGameItemById(id));
+  const items = monitoredGameItemIds.map((id) => gameItemsById[id]);
 
   return (
     <aside className="w-1/4 min-w-[240px] max-w-[320px] border-r border-slate-800 bg-slate-900 flex flex-col">

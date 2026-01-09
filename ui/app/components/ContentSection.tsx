@@ -76,8 +76,8 @@ export function ContentSection({
   selectedItemId,
   listings,
 }: ContentSectionProps) {
-  const { getGameItemById } = useGameItems();
-  const selectedItem = getGameItemById(selectedItemId);
+  const { gameItemsById } = useGameItems();
+  const selectedItem = gameItemsById[selectedItemId];
   const [filters, setFilters] = useState<FilterValues>(DEFAULT_FILTERS);
   const [timeRange, setTimeRange] = useState<TimeRange>("30d");
 
