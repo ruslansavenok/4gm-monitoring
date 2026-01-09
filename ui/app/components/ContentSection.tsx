@@ -6,22 +6,49 @@ import { Filters, FilterValues, DEFAULT_FILTERS } from "./Filters";
 import { ItemIcon } from "./ItemIcon";
 import { useGameItems } from "../context/GameItemsContext";
 import { deleteMonitoringTask } from "../actions/monitoring-tasks";
+import type { PrivateListing } from "../../../db/models/PrivateListing";
 
-interface Listing {
-  _id: string;
-  seenAt: string;
-  characterName: string;
-  price: number;
-  enchant: number;
+type TimeRange = "14d" | "30d" | "3m" | "all";
+
+const TIME_RANGES: { value: TimeRange; label: string }[] = [
+  { value: "14d", label: "14 Days" },
+  { value: "30d", label: "30 Days" },
+  { value: "3m", label: "3 Months" },
+  { value: "all", label: "All" },
+];
+
+function getDateThreshold(range: TimeRange): Date | null {
+  const now = new Date();
+  switch (range) {
+    case "14d":
+      return new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
+    case "30d":
+      return new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+    case "3m":
+      return new Date(now.getTime() - 90 * 24 * 60 * 60 * 1000);
+    case "all":
+      return null;
+  }
 }
 
 interface ContentSectionProps {
   selectedItemId: number;
-  listings: Listing[];
+  listings: PrivateListing[];
 }
 
-function applyFilters(listings: Listing[], filters: FilterValues): Listing[] {
+function applyFilters(
+  listings: PrivateListing[],
+  filters: FilterValues,
+  timeRange: TimeRange,
+): PrivateListing[] {
+  const threshold = getDateThreshold(timeRange);
+
   return listings.filter((listing) => {
+    // Date filter
+    if (threshold && new Date(listing.seenAt) < threshold) {
+      return false;
+    }
+
     // Enchant filter
     if (filters.enchant.min !== null && listing.enchant < filters.enchant.min) {
       return false;
@@ -34,8 +61,8 @@ function applyFilters(listings: Listing[], filters: FilterValues): Listing[] {
   });
 }
 
-function formatDate(date: string): string {
-  return new Date(date).toLocaleString("en-US", {
+function formatDate(date: Date) {
+  return date.toLocaleString("en-US", {
     month: "short",
     day: "numeric",
     hour: "2-digit",
@@ -50,10 +77,11 @@ export function ContentSection({
   const { getGameItemById } = useGameItems();
   const selectedItem = getGameItemById(selectedItemId);
   const [filters, setFilters] = useState<FilterValues>(DEFAULT_FILTERS);
+  const [timeRange, setTimeRange] = useState<TimeRange>("30d");
 
   const filteredListings = useMemo(
-    () => applyFilters(listings, filters),
-    [listings, filters],
+    () => applyFilters(listings, filters, timeRange),
+    [listings, filters, timeRange],
   );
 
   return (
@@ -99,6 +127,22 @@ export function ContentSection({
       </header>
 
       <Filters values={filters} onChange={setFilters} />
+
+      <div className="flex gap-1 mb-4">
+        {TIME_RANGES.map((range) => (
+          <button
+            key={range.value}
+            onClick={() => setTimeRange(range.value)}
+            className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
+              timeRange === range.value
+                ? "bg-blue-500/20 text-blue-400 border border-blue-500/30"
+                : "text-slate-400 hover:text-slate-300 hover:bg-slate-800 border border-transparent"
+            }`}
+          >
+            {range.label}
+          </button>
+        ))}
+      </div>
 
       <PriceChart listings={filteredListings} />
 
