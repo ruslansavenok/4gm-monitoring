@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import type { ItemType } from "../../../db/models/Item";
 import { ItemIcon } from "./ItemIcon";
+import { createMonitoringTask } from "../actions/monitoring-tasks";
 
 type AddTaskDialogProps = {
   isOpen: boolean;
@@ -78,26 +79,11 @@ export function AddTaskDialog({
     setError(null);
 
     try {
-      const response = await fetch("/api/monitoring-tasks", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          itemId: selectedItem._id,
-          checkFrequencySec: checkFrequency,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setError(data.error || "Failed to create monitoring task");
-        return;
-      }
-
+      await createMonitoringTask(selectedItem._id, checkFrequency);
       router.refresh();
       onClose();
-    } catch {
-      setError("Failed to create monitoring task");
+    } catch (e: unknown) {
+      setError(`Failed: ${e}`);
     } finally {
       setIsLoading(false);
     }
