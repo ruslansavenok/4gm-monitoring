@@ -10,19 +10,12 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from "recharts";
+import type { PrivateListing } from "../../../db/models/PrivateListing";
 
 type TimeRange = "14d" | "30d" | "3m" | "all";
 
-interface Listing {
-  _id: string;
-  seenAt: string;
-  price: number;
-  enchant: number;
-  characterName: string;
-}
-
 interface PriceChartProps {
-  listings: Listing[];
+  listings: PrivateListing[];
 }
 
 const TIME_RANGES: { value: TimeRange; label: string }[] = [

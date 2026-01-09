@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { InferSchemaType } from "mongoose";
 
 type RawListing = {
   seenAt: Date;
@@ -63,6 +63,8 @@ export function generateListingId(listing: {
     .map(([key, value]) => `${key}:${value}`)
     .join(",");
 }
+
+export type PrivateListing = InferSchemaType<typeof privateListingSchema>;
 
 export const PrivateListingModel = mongoose.model(
   "PrivateListing",
