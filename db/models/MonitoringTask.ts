@@ -44,7 +44,7 @@ const monitoringTaskSchema = new mongoose.Schema(
 
 monitoringTaskSchema.index({ serverId: 1, itemId: 1 }, { unique: true });
 
-// TODO: figure typescript
-export const MonitoringTask =
-  mongoose.models.MonitoringTask ||
-  mongoose.model("MonitoringTask", monitoringTaskSchema);
+export const MonitoringTask = mongoose.model(
+  "MonitoringTask",
+  monitoringTaskSchema,
+);

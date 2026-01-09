@@ -8,5 +8,4 @@ const gameItemSchema = new mongoose.Schema({
 });
 
 export type GameItemType = InferSchemaType<typeof gameItemSchema>;
-export const GameItem =
-  mongoose.models.GameItem || mongoose.model("GameItem", gameItemSchema);
+export const GameItem = mongoose.model("GameItem", gameItemSchema);
