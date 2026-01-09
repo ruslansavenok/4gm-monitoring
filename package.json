@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "type": "module",
   "workspaces": [
-    "data_processor",
-    "ui",
-    "items_scraper"
+    "listings-parser",
+    "game-items-parser",
+    "ui"
   ],
   "scripts": {
-    "parser:start": "npm run start -w data_processor",
+    "listings:parse": "npm run start -w listings-parser",
+    "game-items:parse": "npm run start -w game-items-parser",
     "ui:dev": "npm run dev -w ui",
-    "items_scraper:start": "npm run start -w items_scraper",
     "test": "vitest run",
     "prepare": "husky"
   },

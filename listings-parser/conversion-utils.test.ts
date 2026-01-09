@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { stringPriceToNumber, ruListingWhenToDate } from "./conversion_utils";
+import { stringPriceToNumber, ruListingWhenToDate } from "./conversion-utils";
 
 describe("stringPriceToNumber", () => {
   it("parses price with spaces", () => {

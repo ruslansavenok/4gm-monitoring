@@ -1,5 +1,5 @@
 {
-  "name": "data_processor",
+  "name": "listings-parser",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
