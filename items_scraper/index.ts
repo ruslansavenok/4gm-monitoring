@@ -1,5 +1,5 @@
 import { setupMongoConnection } from "../db/connection";
-import { Item } from "../db/models/Item";
+import { GameItem } from "../db/models/GameItem";
 import { scrapeItem, ItemNotFoundError, ItemUntradableError } from "./scraper";
 import WorkQueue from "./work_queue";
 import logger from "../shared/logger";
@@ -18,7 +18,9 @@ const IS_REFRESHING_EXISTING = true;
 
     let ids: number[];
     if (IS_REFRESHING_EXISTING) {
-      const items = await Item.find({}, { _id: 1 }).sort({ _id: -1 }).lean();
+      const items = await GameItem.find({}, { _id: 1 })
+        .sort({ _id: -1 })
+        .lean();
       ids = items.map((item) => item._id);
     } else {
       ids = Array.from({ length: 90_000 }, (_, i) => i + 1);
@@ -52,7 +54,11 @@ async function processWorker(queue: WorkQueue, workerId: number) {
 
     try {
       const item = await scrapeItem(id);
-      await Item.updateOne({ _id: item._id }, { $set: item }, { upsert: true });
+      await GameItem.updateOne(
+        { _id: item._id },
+        { $set: item },
+        { upsert: true },
+      );
     } catch (error) {
       if (error instanceof ItemNotFoundError) {
         logger.info(`Worker ${workerId} item ${id} not found`);
@@ -60,7 +66,7 @@ async function processWorker(queue: WorkQueue, workerId: number) {
         logger.info(
           `Worker ${workerId} item ${id} is untradable, deleting if exists`,
         );
-        await Item.deleteOne({ _id: id });
+        await GameItem.deleteOne({ _id: id });
       } else {
         logger.info(`Worker ${workerId} error scraping item ${id}: ${error}`);
       }

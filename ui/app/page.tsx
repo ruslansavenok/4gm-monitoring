@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Item } from "../../db/models/Item";
+import { GameItem } from "../../db/models/GameItem";
 import { MonitoringTask } from "../../db/models/MonitoringTask";
 import { PrivateListing } from "../../db/models/PrivateListing";
 import { ContentSection } from "./components/ContentSection";
@@ -22,7 +22,7 @@ export default async function HomePage({
   const taskItemIds = await MonitoringTask.find({
     serverId: SERVER_ID,
   }).distinct("itemId");
-  const items = await Item.find({ _id: { $in: taskItemIds } }).lean();
+  const items = await GameItem.find({ _id: { $in: taskItemIds } }).lean();
 
   // Get listings for selected item
   let listings: Array<{

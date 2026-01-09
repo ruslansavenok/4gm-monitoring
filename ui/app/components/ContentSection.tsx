@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import { PriceChart } from "./PriceChart";
 import { Filters, FilterValues, DEFAULT_FILTERS } from "./Filters";
 import { ItemIcon } from "./ItemIcon";
-import { useItems } from "../context/ItemsContext";
+import { useGameItems } from "../context/GameItemsContext";
 import { deleteMonitoringTask } from "../actions/monitoring-tasks";
 
 interface Listing {
@@ -47,8 +47,8 @@ export function ContentSection({
   selectedItemId,
   listings,
 }: ContentSectionProps) {
-  const { getItemById } = useItems();
-  const selectedItem = getItemById(selectedItemId);
+  const { getGameItemById } = useGameItems();
+  const selectedItem = getGameItemById(selectedItemId);
   const [filters, setFilters] = useState<FilterValues>(DEFAULT_FILTERS);
 
   const filteredListings = useMemo(

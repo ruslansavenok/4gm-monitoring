@@ -2,24 +2,22 @@
 
 import { useState, useEffect, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import type { ItemType } from "../../../db/models/Item";
+import { useGameItems } from "../context/GameItemsContext";
+import type { GameItemType } from "../../../db/models/GameItem";
 import { ItemIcon } from "./ItemIcon";
 import { createMonitoringTask } from "../actions/monitoring-tasks";
-
-type AddTaskDialogProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  allItems: ItemType[];
-};
 
 export function AddTaskDialog({
   isOpen,
   onClose,
-  allItems,
-}: AddTaskDialogProps) {
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) {
   const router = useRouter();
+  const { gameItems } = useGameItems();
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedItem, setSelectedItem] = useState<ItemType | null>(null);
+  const [selectedItem, setSelectedItem] = useState<GameItemType | null>(null);
   const [checkFrequency, setCheckFrequency] = useState(300);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -33,7 +31,7 @@ export function AddTaskDialog({
     const numericQuery = parseInt(searchQuery, 10);
     const queryWords = searchQuery.toLowerCase().split(/\s+/).filter(Boolean);
 
-    return allItems
+    return gameItems
       .filter((item) => {
         const nameLower = item.name.toLowerCase();
         // All query words must appear in the name
@@ -42,7 +40,7 @@ export function AddTaskDialog({
         return nameMatch || idMatch;
       })
       .slice(0, 20);
-  }, [searchQuery, selectedItem, allItems]);
+  }, [searchQuery, selectedItem, gameItems]);
 
   // Reset form when dialog opens
   useEffect(() => {
@@ -56,7 +54,7 @@ export function AddTaskDialog({
     }
   }, [isOpen]);
 
-  const handleSelectItem = (item: ItemType) => {
+  const handleSelectItem = (item: GameItemType) => {
     setSelectedItem(item);
     setSearchQuery(item.name);
     setShowSuggestions(false);

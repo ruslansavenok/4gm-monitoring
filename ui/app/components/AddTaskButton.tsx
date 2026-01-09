@@ -2,11 +2,9 @@
 
 import { useState } from "react";
 import { AddTaskDialog } from "./AddTaskDialog";
-import { useItems } from "../context/ItemsContext";
 
 export function AddTaskButton() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const { items } = useItems();
 
   return (
     <>
@@ -33,7 +31,6 @@ export function AddTaskButton() {
       <AddTaskDialog
         isOpen={isDialogOpen}
         onClose={() => setIsDialogOpen(false)}
-        allItems={items}
       />
     </>
   );
