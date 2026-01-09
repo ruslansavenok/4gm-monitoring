@@ -1,14 +1,12 @@
-import * as api from "./rpc_client";
 import { setupMongoConnection } from "../db/connection";
-import { PrivateListing } from "../db/models/PrivateListing";
 import { MonitoringTask } from "../db/models/MonitoringTask";
+import { PrivateListing } from "../db/models/PrivateListing";
 import logger from "../shared/logger";
+import * as api from "./rpc-client";
 
 let isInitialized = false;
 let isProcessing = false;
 
-// TODO: consider renaming this workspace
-// eg listing_processor
 (async () => {
   await setupMongoConnection();
 

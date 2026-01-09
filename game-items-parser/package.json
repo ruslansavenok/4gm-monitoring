@@ -1,5 +1,5 @@
 {
-  "name": "items_scraper",
+  "name": "game-items-parser",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
