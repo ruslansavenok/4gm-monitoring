@@ -1,8 +1,8 @@
 import { setupMongoConnection } from "../db/connection";
 import { GameItemModel } from "../db/models/GameItem";
+import logger from "../shared/logger";
 import { scrapeItem, ItemNotFoundError, ItemUntradableError } from "./scraper";
 import WorkQueue from "./work_queue";
-import logger from "../shared/logger";
 
 const WORKER_COUNT = 4;
 const IS_REFRESHING_EXISTING = true;

@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
+import { useState } from "react";
 import { useGameItems } from "../../context/GameItemsContext";
-import { ItemIcon } from "./ItemIcon";
 import { AddTaskDialog } from "./AddTaskDialog";
+import { ItemIcon } from "./ItemIcon";
 
 interface SidebarProps {
   monitoredGameItemIds: number[];

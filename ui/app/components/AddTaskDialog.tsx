@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import { useGameItems } from "../../context/GameItemsContext";
+import { useState, useEffect, useRef, useMemo } from "react";
 import type { GameItem } from "../../../db/models/GameItem";
-import { ItemIcon } from "./ItemIcon";
 import { createMonitoringTask } from "../../actions/monitoring-tasks";
+import { useGameItems } from "../../context/GameItemsContext";
+import { ItemIcon } from "./ItemIcon";
 
 // TODO: refactor
 export function AddTaskDialog({

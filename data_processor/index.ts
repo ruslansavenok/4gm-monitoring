@@ -1,8 +1,8 @@
-import * as api from "./rpc_client";
 import { setupMongoConnection } from "../db/connection";
-import { PrivateListingModel } from "../db/models/PrivateListing";
 import { MonitoringTaskModel } from "../db/models/MonitoringTask";
+import { PrivateListingModel } from "../db/models/PrivateListing";
 import logger from "../shared/logger";
+import * as api from "./rpc_client";
 
 let isInitialized = false;
 let isProcessing = false;
