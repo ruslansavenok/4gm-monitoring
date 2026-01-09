@@ -7,6 +7,7 @@ import type { GameItem } from "../../../db/models/GameItem";
 import { ItemIcon } from "./ItemIcon";
 import { createMonitoringTask } from "../actions/monitoring-tasks";
 
+// TODO: refactor
 export function AddTaskDialog({
   isOpen,
   onClose,

@@ -70,6 +70,8 @@ function formatDate(date: Date) {
   });
 }
 
+// TODO: refactor
+// do i need selectedItemId here? Maybe a prop instead?
 export function ContentSection({
   selectedItemId,
   listings,

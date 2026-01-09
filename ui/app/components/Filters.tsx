@@ -7,6 +7,7 @@ export interface FilterValues {
   };
 }
 
+// TODO: refactor
 export const DEFAULT_FILTERS: FilterValues = {
   enchant: {
     min: null,
