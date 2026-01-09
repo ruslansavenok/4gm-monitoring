@@ -7,7 +7,7 @@ import {
   useMemo,
   useCallback,
 } from "react";
-import type { GameItem } from "../../../db/models/GameItem";
+import type { GameItem } from "../../db/models/GameItem";
 
 interface GameItemsContextType {
   gameItems: GameItem[];

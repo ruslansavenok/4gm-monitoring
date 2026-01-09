@@ -4,8 +4,8 @@ import { useState, useMemo } from "react";
 import { PriceChart } from "./PriceChart";
 import { Filters, FilterValues, DEFAULT_FILTERS } from "./Filters";
 import { ItemIcon } from "./ItemIcon";
-import { useGameItems } from "../context/GameItemsContext";
-import { deleteMonitoringTask } from "../actions/monitoring-tasks";
+import { useGameItems } from "../../context/GameItemsContext";
+import { deleteMonitoringTask } from "../../actions/monitoring-tasks";
 import type { PrivateListing } from "../../../db/models/PrivateListing";
 
 type TimeRange = "14d" | "30d" | "3m" | "all";

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useGameItems } from "../context/GameItemsContext";
+import { useGameItems } from "../../context/GameItemsContext";
 import { ItemIcon } from "./ItemIcon";
 import { AddTaskDialog } from "./AddTaskDialog";
 

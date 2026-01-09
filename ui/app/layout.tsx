@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { setupMongoConnection } from "../../db/connection";
 import { GameItemModel, type GameItem } from "../../db/models/GameItem";
-import { GameItemsProvider } from "./context/GameItemsContext";
+import { GameItemsProvider } from "../context/GameItemsContext";
 import "./globals.css";
 
 export const metadata: Metadata = {

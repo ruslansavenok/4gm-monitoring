@@ -2,10 +2,10 @@
 
 import { useState, useEffect, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import { useGameItems } from "../context/GameItemsContext";
+import { useGameItems } from "../../context/GameItemsContext";
 import type { GameItem } from "../../../db/models/GameItem";
 import { ItemIcon } from "./ItemIcon";
-import { createMonitoringTask } from "../actions/monitoring-tasks";
+import { createMonitoringTask } from "../../actions/monitoring-tasks";
 
 // TODO: refactor
 export function AddTaskDialog({

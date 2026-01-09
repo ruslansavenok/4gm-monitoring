@@ -1,8 +1,8 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { MonitoringTaskModel } from "../../../db/models/MonitoringTask";
-import { SERVER_ID } from "../../lib/constants";
+import { MonitoringTaskModel } from "../../db/models/MonitoringTask";
+import { SERVER_ID } from "../lib/constants";
 
 export async function createMonitoringTask(
   itemId: number,
