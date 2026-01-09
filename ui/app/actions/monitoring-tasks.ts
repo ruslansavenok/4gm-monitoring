@@ -2,8 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { MonitoringTaskModel } from "../../../db/models/MonitoringTask";
-
-const SERVER_ID = 45;
+import { SERVER_ID } from "../../lib/constants";
 
 export async function createMonitoringTask(
   itemId: number,

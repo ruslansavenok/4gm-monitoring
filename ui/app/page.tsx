@@ -1,19 +1,16 @@
 import { MonitoringTaskModel } from "../../db/models/MonitoringTask";
 import { PrivateListingModel } from "../../db/models/PrivateListing";
+import { SERVER_ID } from "../lib/constants";
 import { ContentSection } from "./components/ContentSection";
 import { Sidebar } from "./components/Sidebar";
-
-// TODO: move to some sort of const, figure out where to put
-const SERVER_ID = 45;
-
-type SearchParams = Promise<{ itemId?: string }>;
 
 export default async function HomePage({
   searchParams,
 }: {
-  searchParams: SearchParams;
+  searchParams: Promise<{ itemId?: string }>;
 }) {
   const { itemId } = await searchParams;
+  // gameItemId vs itemId to match query params
   const selectedGameItemId = itemId ? parseInt(itemId, 10) : null;
   const monitoredGameItemIds = await MonitoringTaskModel.find({
     serverId: SERVER_ID,
