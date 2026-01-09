@@ -33,8 +33,6 @@ export default async function HomePage({
         monitoredGameItemIds={monitoredGameItemIds}
         selectedGameItemId={selectedGameItemId}
       />
-
-      {/* Content */}
       <main className="flex-1 overflow-y-auto">
         {selectedGameItemId ? (
           <ContentSection

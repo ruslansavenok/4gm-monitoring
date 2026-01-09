@@ -38,7 +38,7 @@ export function GameItemsProvider({
   );
 }
 
-// TODO: remove byId logic or make 2 hooks, or something else, but make it better
+// TODO: remove byId logic or make 2 hooks, or something else, but make it better (probably just return useContext)
 export function useGameItems() {
   const { gameItems, gameItemsById } = useContext(GameItemsContext);
 
