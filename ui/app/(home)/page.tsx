@@ -34,11 +34,9 @@ export default async function HomePage({
           <ContentSection selectedItemId={selectedItemId} listings={listings} />
         ) : (
           <div className="flex items-center justify-center h-full">
-            <div className="text-center">
-              <p className="text-slate-500 text-sm">
-                Select an item from the sidebar to view listings
-              </p>
-            </div>
+            <p className="text-center text-slate-500 text-sm">
+              Select an item from the sidebar to view listings
+            </p>
           </div>
         )}
       </main>
