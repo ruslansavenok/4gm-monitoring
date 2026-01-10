@@ -1,6 +1,6 @@
-import { gameIconUrl } from "../../lib/utils";
+import { gameIconUrl } from "../lib/utils";
 
-type ItemIconProps = {
+type GameItemIconProps = {
   item: {
     icon: string;
     iconPanel?: string | null;
@@ -8,7 +8,10 @@ type ItemIconProps = {
   className?: string;
 };
 
-export function ItemIcon({ item, className = "w-6 h-6" }: ItemIconProps) {
+export function GameItemIcon({
+  item,
+  className = "w-6 h-6",
+}: GameItemIconProps) {
   return (
     <div className={`relative shrink-0 ${className}`}>
       <img

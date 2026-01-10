@@ -1,9 +1,9 @@
 "use client";
 
-import { X } from "@phosphor-icons/react";
+import { XIcon } from "@phosphor-icons/react";
 import { useEffect, useMemo, useState } from "react";
-import type { GameItem } from "../../../db/models/GameItem";
-import { ItemIcon } from "./ItemIcon";
+import type { GameItem } from "../../db/models/GameItem";
+import { GameItemIcon } from "./GameItemIcon";
 
 type GameItemAutocompleteProps = {
   gameItems: GameItem[];
@@ -11,7 +11,6 @@ type GameItemAutocompleteProps = {
   onSelectItem: (item: GameItem | null) => void;
 };
 
-// TODO: move to the root
 export function GameItemAutocomplete({
   gameItems,
   selectedItem,
@@ -48,7 +47,7 @@ export function GameItemAutocomplete({
       </label>
       {selectedItem ? (
         <div className="flex items-center gap-3 px-3 py-2 bg-slate-800 border border-slate-600 rounded-md">
-          <ItemIcon item={selectedItem} />
+          <GameItemIcon item={selectedItem} />
           <span className="flex-1 text-sm text-slate-200">
             {selectedItem.name}
           </span>
@@ -57,7 +56,7 @@ export function GameItemAutocomplete({
             onClick={() => onSelectItem(null)}
             className="text-slate-400 hover:text-slate-200 transition-colors"
           >
-            <X className="w-4 h-4" />
+            <XIcon className="w-4 h-4" />
           </button>
         </div>
       ) : (
@@ -83,7 +82,7 @@ export function GameItemAutocomplete({
                     onClick={() => onSelectItem(item)}
                     className="w-full flex items-center gap-3 px-3 py-2 text-left hover:bg-slate-700 transition-colors"
                   >
-                    <ItemIcon item={item} />
+                    <GameItemIcon item={item} />
                     <span className="text-sm text-slate-200">{item.name}</span>
                     <span className="text-xs text-slate-500 ml-auto">
                       #{item._id}

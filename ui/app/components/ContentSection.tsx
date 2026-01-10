@@ -1,12 +1,12 @@
 "use client";
 
-import { Trash } from "@phosphor-icons/react";
+import { TrashIcon } from "@phosphor-icons/react";
 import { useState, useMemo } from "react";
 import type { PrivateListing } from "../../../db/models/PrivateListing";
 import { deleteMonitoringTask } from "../../actions/monitoring-tasks";
+import { GameItemIcon } from "../../components/GameItemIcon";
 import { useGameItems } from "../../context/GameItemsContext";
 import { Filters, FilterValues, DEFAULT_FILTERS } from "./Filters";
-import { ItemIcon } from "./ItemIcon";
 import { PriceChart } from "./PriceChart";
 
 type TimeRange = "14d" | "30d" | "3m" | "all";
@@ -92,7 +92,7 @@ export function ContentSection({
       <header className="mb-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <ItemIcon item={selectedItem} className="w-10 h-10" />
+            <GameItemIcon item={selectedItem} className="w-10 h-10" />
             <h2 className="text-xl font-semibold text-slate-100">
               {selectedItem.name}
             </h2>
@@ -103,7 +103,7 @@ export function ContentSection({
               className="w-9 h-9 flex items-center justify-center rounded-md border border-slate-700 text-slate-400 hover:text-red-400 hover:border-red-500/50 hover:bg-red-500/10 transition-colors"
               title="Delete monitoring task"
             >
-              <Trash className="w-4 h-4" />
+              <TrashIcon className="w-4 h-4" />
             </button>
           </form>
         </div>

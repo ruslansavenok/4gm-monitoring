@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import type { GameItem } from "../../../db/models/GameItem";
 import { createMonitoringTask } from "../../actions/monitoring-tasks";
+import { GameItemAutocomplete } from "../../components/GameItemAutocomplete";
 import { useGameItems } from "../../context/GameItemsContext";
-import { GameItemAutocomplete } from "./GameItemAutocomplete";
 
 // TODO: refactor
 export function AddTaskDialog({

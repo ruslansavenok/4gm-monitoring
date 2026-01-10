@@ -1,11 +1,11 @@
 "use client";
 
-import { Plus } from "@phosphor-icons/react";
+import { PlusIcon } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useState } from "react";
+import { GameItemIcon } from "../../components/GameItemIcon";
 import { useGameItems } from "../../context/GameItemsContext";
 import { AddTaskDialog } from "./AddTaskDialog";
-import { ItemIcon } from "./ItemIcon";
 
 interface SidebarProps {
   monitoredItemIds: number[];
@@ -42,7 +42,7 @@ export function Sidebar({ monitoredItemIds, selectedItemId }: SidebarProps) {
                         : "text-slate-300 hover:bg-slate-800 hover:text-slate-100"
                     }`}
                   >
-                    <ItemIcon item={item} className="w-8 h-8" />
+                    <GameItemIcon item={item} className="w-8 h-8" />
                     <span className="text-sm font-medium truncate">
                       {item.name}
                     </span>
@@ -58,7 +58,7 @@ export function Sidebar({ monitoredItemIds, selectedItemId }: SidebarProps) {
           onClick={() => setIsDialogOpen(true)}
           className="w-full flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 hover:text-slate-100 border border-slate-700 rounded-md transition-colors"
         >
-          <Plus className="w-4 h-4" />
+          <PlusIcon className="w-4 h-4" />
           Add
         </button>
       </div>
