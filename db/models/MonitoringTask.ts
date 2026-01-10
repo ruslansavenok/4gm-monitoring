@@ -4,7 +4,7 @@ const monitoringTaskSchema = new mongoose.Schema(
   {
     serverId: { type: Number, required: true, index: true },
     itemId: { type: Number, required: true, index: true },
-    lastCheckedAt: { type: Date, required: true, default: null },
+    lastCheckedAt: { type: Date, default: null },
     checkFrequencySec: { type: Number, required: true, default: 300 },
   },
   {
@@ -42,7 +42,9 @@ const monitoringTaskSchema = new mongoose.Schema(
   },
 );
 
-export const MonitoringTask = mongoose.model(
+monitoringTaskSchema.index({ serverId: 1, itemId: 1 }, { unique: true });
+
+export const MonitoringTaskModel = mongoose.model(
   "MonitoringTask",
   monitoringTaskSchema,
 );

@@ -15,6 +15,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "dotenv": "^17.2.3",
     "mongoose": "^9.1.1"
   },
