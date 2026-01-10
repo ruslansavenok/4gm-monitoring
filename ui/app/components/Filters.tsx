@@ -39,7 +39,6 @@ export function Filters({ values, onChange }: FiltersProps) {
 
   return (
     <div className="flex flex-wrap items-center gap-4 p-4 border border-slate-800 rounded-lg bg-slate-900/50 mb-6">
-      {/* Enchant Filter */}
       <div className="flex items-center gap-2">
         <label className="text-xs font-medium text-slate-400 uppercase tracking-wide">
           Enchant
@@ -64,8 +63,6 @@ export function Filters({ values, onChange }: FiltersProps) {
           />
         </div>
       </div>
-
-      {/* Future filters can be added here */}
     </div>
   );
 }
