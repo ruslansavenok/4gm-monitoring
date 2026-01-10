@@ -3,8 +3,8 @@
 import { PlusIcon } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useState } from "react";
-import { GameItemIcon } from "../../components/GameItemIcon";
-import { useGameItems } from "../../context/GameItemsContext";
+import { GameItemIcon } from "../../../components/GameItemIcon";
+import { useGameItems } from "../../../context/GameItemsContext";
 import { AddTaskDialog } from "./AddTaskDialog";
 
 interface SidebarProps {
