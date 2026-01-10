@@ -2,10 +2,10 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import type { GameItem } from "../../../../db/models/GameItem";
-import { createMonitoringTask } from "../../../actions/monitoring-tasks";
-import { GameItemAutocomplete } from "../../../components/GameItemAutocomplete";
-import { useGameItems } from "../../../context/GameItemsContext";
+import type { GameItem } from "@db/models/GameItem";
+import { createMonitoringTask } from "@/ui/actions/monitoring-tasks";
+import { GameItemAutocomplete } from "@/ui/components/GameItemAutocomplete";
+import { useGameItems } from "@/ui/context/GameItemsContext";
 
 // TODO: refactor
 export function AddTaskDialog({

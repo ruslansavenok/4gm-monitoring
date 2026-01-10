@@ -2,10 +2,10 @@
 
 import { TrashIcon } from "@phosphor-icons/react";
 import { useState, useMemo } from "react";
-import type { PrivateListing } from "../../../../db/models/PrivateListing";
-import { deleteMonitoringTask } from "../../../actions/monitoring-tasks";
-import { GameItemIcon } from "../../../components/GameItemIcon";
-import { useGameItems } from "../../../context/GameItemsContext";
+import type { PrivateListing } from "@db/models/PrivateListing";
+import { deleteMonitoringTask } from "@/ui/actions/monitoring-tasks";
+import { GameItemIcon } from "@/ui/components/GameItemIcon";
+import { useGameItems } from "@/ui/context/GameItemsContext";
 import { Filters, FilterValues, DEFAULT_FILTERS } from "./Filters";
 import { PriceChart } from "./PriceChart";
 

@@ -10,7 +10,7 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from "recharts";
-import type { PrivateListing } from "../../../../db/models/PrivateListing";
+import type { PrivateListing } from "@db/models/PrivateListing";
 
 interface PriceChartProps {
   listings: PrivateListing[];
