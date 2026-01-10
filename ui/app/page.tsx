@@ -10,15 +10,14 @@ export default async function HomePage({
   searchParams: Promise<{ itemId?: string }>;
 }) {
   const { itemId } = await searchParams;
-  // gameItemId vs itemId to match query params
-  const selectedGameItemId = itemId ? parseInt(itemId, 10) : null;
-  const monitoredGameItemIds = await MonitoringTaskModel.find({
+  const selectedItemId = itemId ? parseInt(itemId, 10) : null;
+  const monitoredItemIds = await MonitoringTaskModel.find({
     serverId: SERVER_ID,
   }).distinct("itemId");
-  const listings = selectedGameItemId
+  const listings = selectedItemId
     ? await PrivateListingModel.find({
         serverId: SERVER_ID,
-        itemId: selectedGameItemId,
+        itemId: selectedItemId,
       })
         .sort({ seenAt: -1 })
         .lean()
@@ -27,15 +26,12 @@ export default async function HomePage({
   return (
     <div className="flex h-screen">
       <Sidebar
-        monitoredGameItemIds={monitoredGameItemIds}
-        selectedGameItemId={selectedGameItemId}
+        monitoredItemIds={monitoredItemIds}
+        selectedItemId={selectedItemId}
       />
       <main className="flex-1 overflow-y-auto">
-        {selectedGameItemId ? (
-          <ContentSection
-            selectedItemId={selectedGameItemId}
-            listings={listings}
-          />
+        {selectedItemId ? (
+          <ContentSection selectedItemId={selectedItemId} listings={listings} />
         ) : (
           <div className="flex items-center justify-center h-full">
             <div className="text-center">

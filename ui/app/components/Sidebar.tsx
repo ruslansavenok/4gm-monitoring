@@ -7,17 +7,14 @@ import { AddTaskDialog } from "./AddTaskDialog";
 import { ItemIcon } from "./ItemIcon";
 
 interface SidebarProps {
-  monitoredGameItemIds: number[];
-  selectedGameItemId: number | null;
+  monitoredItemIds: number[];
+  selectedItemId: number | null;
 }
 
-export function Sidebar({
-  monitoredGameItemIds,
-  selectedGameItemId,
-}: SidebarProps) {
+export function Sidebar({ monitoredItemIds, selectedItemId }: SidebarProps) {
   const { gameItemsById } = useGameItems();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const items = monitoredGameItemIds.map((id) => gameItemsById[id]);
+  const items = monitoredItemIds.map((id) => gameItemsById[id]);
 
   return (
     <aside className="w-1/4 min-w-[240px] max-w-[320px] border-r border-slate-800 bg-slate-900 flex flex-col">
@@ -32,7 +29,7 @@ export function Sidebar({
         ) : (
           <ul className="space-y-1">
             {items.map((item) => {
-              const isActive = item._id === selectedGameItemId;
+              const isActive = item._id === selectedItemId;
               return (
                 <li key={item._id}>
                   <Link
