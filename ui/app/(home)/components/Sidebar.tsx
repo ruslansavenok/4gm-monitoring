@@ -54,6 +54,10 @@ export function Sidebar({ monitoredItemIds, selectedItemId }: SidebarProps) {
         )}
       </nav>
       <div className="p-3 border-t border-slate-800">
+        <AddTaskDialog
+          isOpen={isDialogOpen}
+          onClose={() => setIsDialogOpen(false)}
+        />
         <button
           onClick={() => setIsDialogOpen(true)}
           className="w-full flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 hover:text-slate-100 border border-slate-700 rounded-md transition-colors"
@@ -62,11 +66,6 @@ export function Sidebar({ monitoredItemIds, selectedItemId }: SidebarProps) {
           Add
         </button>
       </div>
-
-      <AddTaskDialog
-        isOpen={isDialogOpen}
-        onClose={() => setIsDialogOpen(false)}
-      />
     </aside>
   );
 }
