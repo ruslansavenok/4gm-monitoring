@@ -7,7 +7,6 @@ import { createMonitoringTask } from "@/ui/actions/monitoring-tasks";
 import { GameItemAutocomplete } from "@/ui/components/GameItemAutocomplete";
 import { useGameItems } from "@/ui/context/GameItemsContext";
 
-// TODO: refactor
 export function AddTaskDialog({
   isOpen,
   onClose,
@@ -33,16 +32,11 @@ export function AddTaskDialog({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!selectedItem) {
-      setError("Please select an item");
-      return;
-    }
-
     setIsLoading(true);
     setError(null);
 
     try {
-      await createMonitoringTask(selectedItem._id, checkFrequency);
+      await createMonitoringTask(selectedItem!._id, checkFrequency);
       router.refresh();
       onClose();
     } catch (e: unknown) {
@@ -100,14 +94,14 @@ export function AddTaskDialog({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-slate-100 transition-colors"
+              className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-slate-100 transition-colors cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isLoading || !selectedItem}
-              className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
             >
               {isLoading ? "Creating..." : "Create"}
             </button>

@@ -54,7 +54,7 @@ export function GameItemAutocomplete({
           <button
             type="button"
             onClick={() => onSelectItem(null)}
-            className="text-slate-400 hover:text-slate-200 transition-colors"
+            className="text-slate-400 hover:text-slate-200 transition-colors cursor-pointer"
           >
             <XIcon className="w-4 h-4" />
           </button>
