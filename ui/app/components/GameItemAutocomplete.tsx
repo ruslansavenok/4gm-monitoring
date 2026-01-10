@@ -1,5 +1,6 @@
 "use client";
 
+import { X } from "@phosphor-icons/react";
 import { useEffect, useMemo, useState } from "react";
 import type { GameItem } from "../../../db/models/GameItem";
 import { ItemIcon } from "./ItemIcon";
@@ -10,6 +11,7 @@ type GameItemAutocompleteProps = {
   onSelectItem: (item: GameItem | null) => void;
 };
 
+// TODO: move to the root
 export function GameItemAutocomplete({
   gameItems,
   selectedItem,
@@ -55,19 +57,7 @@ export function GameItemAutocomplete({
             onClick={() => onSelectItem(null)}
             className="text-slate-400 hover:text-slate-200 transition-colors"
           >
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
+            <X className="w-4 h-4" />
           </button>
         </div>
       ) : (
