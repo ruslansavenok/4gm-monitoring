@@ -10,44 +10,17 @@ import { useGameItems } from "@/context/GameItemsContext";
 import { Filters, FilterValues, DEFAULT_FILTERS } from "./Filters";
 import { PriceChart } from "./PriceChart";
 
-type TimeRange = "14d" | "30d" | "3m" | "all";
-
-const TIME_RANGES: { value: TimeRange; label: string }[] = [
-  { value: "14d", label: "14 Days" },
-  { value: "30d", label: "30 Days" },
-  { value: "3m", label: "3 Months" },
-  { value: "all", label: "All" },
-];
-
-function getDateThreshold(range: TimeRange): Date | null {
-  const now = new Date();
-  switch (range) {
-    case "14d":
-      return new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
-    case "30d":
-      return new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
-    case "3m":
-      return new Date(now.getTime() - 90 * 24 * 60 * 60 * 1000);
-    case "all":
-      return null;
-  }
-}
-
-// TODO: Review this shit
+// TODO:
+// Good enough for now, but later we'd want at least date filter to be server side
 function applyFilters(
   listings: PrivateListing[],
   filters: FilterValues,
-  timeRange: TimeRange,
 ): PrivateListing[] {
-  const threshold = getDateThreshold(timeRange);
-
   return listings.filter((listing) => {
-    // Date filter
-    if (threshold && new Date(listing.seenAt) < threshold) {
+    if (filters.minDate && new Date(listing.seenAt) < filters.minDate) {
       return false;
     }
 
-    // Enchant filter
     if (filters.enchant.min !== null && listing.enchant < filters.enchant.min) {
       return false;
     }
@@ -71,11 +44,10 @@ export function ContentSection({
   const { gameItemsById } = useGameItems();
   const selectedItem = gameItemsById[selectedItemId];
   const [filters, setFilters] = useState<FilterValues>(DEFAULT_FILTERS);
-  const [timeRange, setTimeRange] = useState<TimeRange>("30d");
 
   const filteredListings = useMemo(
-    () => applyFilters(listings, filters, timeRange),
-    [listings, filters, timeRange],
+    () => applyFilters(listings, filters),
+    [listings, filters],
   );
 
   return (
@@ -111,23 +83,6 @@ export function ContentSection({
       </header>
 
       <Filters values={filters} onChange={setFilters} />
-
-      <div className="flex gap-1 mb-4">
-        {TIME_RANGES.map((range) => (
-          <button
-            key={range.value}
-            onClick={() => setTimeRange(range.value)}
-            className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
-              timeRange === range.value
-                ? "bg-blue-500/20 text-blue-400 border border-blue-500/30"
-                : "text-slate-400 hover:text-slate-300 hover:bg-slate-800 border border-transparent"
-            }`}
-          >
-            {range.label}
-          </button>
-        ))}
-      </div>
-
       <PriceChart listings={filteredListings} />
 
       {filteredListings.length === 0 ? (
