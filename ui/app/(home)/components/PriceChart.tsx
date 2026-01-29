@@ -31,7 +31,6 @@ function formatPrice(value: number): string {
   return value.toString();
 }
 
-// TODO: define top colors in a better way? Is there a way to import css variables to js?
 export function PriceChart({ listings }: PriceChartProps) {
   const chartData = useMemo(() => {
     return listings
