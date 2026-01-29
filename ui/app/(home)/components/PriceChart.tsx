@@ -11,11 +11,13 @@ import {
   CartesianGrid,
 } from "recharts";
 import type { PrivateListing } from "@db/models/PrivateListing";
+import { formatDate } from "@/lib/utils";
 
 interface PriceChartProps {
   listings: PrivateListing[];
 }
 
+// TODO: play with kkk format for currency
 function formatPrice(value: number): string {
   if (value >= 1_000_000_000) {
     return `${(value / 1_000_000_000).toFixed(1)}B`;
@@ -29,13 +31,7 @@ function formatPrice(value: number): string {
   return value.toString();
 }
 
-function formatDate(timestamp: number): string {
-  return new Date(timestamp).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-  });
-}
-
+// TODO: define top colors in a better way? Is there a way to import css variables to js?
 export function PriceChart({ listings }: PriceChartProps) {
   const chartData = useMemo(() => {
     return listings
@@ -95,12 +91,7 @@ export function PriceChart({ listings }: PriceChartProps) {
                   return (
                     <div className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 shadow-lg">
                       <p className="text-xs text-slate-400">
-                        {new Date(data.timestamp).toLocaleString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })}
+                        {formatDate(data.timestamp)}
                       </p>
                       <p className="text-sm font-mono text-slate-100">
                         {data.price.toLocaleString()}

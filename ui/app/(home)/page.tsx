@@ -1,6 +1,6 @@
 import { MonitoringTaskModel } from "@db/models/MonitoringTask";
 import { PrivateListingModel } from "@db/models/PrivateListing";
-import { SERVER_ID } from "@/ui/lib/constants";
+import { SERVER_ID } from "@/lib/constants";
 import { ContentSection } from "./components/ContentSection";
 import { Sidebar } from "./components/Sidebar";
 
